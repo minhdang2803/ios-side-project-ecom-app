@@ -14,7 +14,7 @@ class CustomButtonUIView: UIButton {
     var layoutTextColor: UIColor?
     var layoutBgColor: UIColor?
     var layoutText: String
-    var trailingIcon: String
+    var trailingIcon: String?
     var onTapped: (() -> Void)?
 
     lazy var button: UIButton = {
@@ -23,7 +23,9 @@ class CustomButtonUIView: UIButton {
         // Set background color cho button
         buttonConfig.baseBackgroundColor = self.layoutBgColor ?? .systemOrange
         // Set icon cho button
-        buttonConfig.image = UIImage(systemName: self.trailingIcon)
+        if let tralingImage = self.trailingIcon {
+            buttonConfig.image = UIImage(systemName: tralingImage)
+        }
 
         // Vị trí của icon trong button leading/trailing
         buttonConfig.imagePlacement = .trailing
@@ -52,7 +54,7 @@ class CustomButtonUIView: UIButton {
         onTapped?()
     }
 
-    init(text: String, trailingIcon: String, backgroundColor: UIColor?, textColor: UIColor?) {
+    init(text: String, trailingIcon: String?, backgroundColor: UIColor?, textColor: UIColor?) {
         self.layoutTextColor = textColor
         self.layoutBgColor = backgroundColor
         self.layoutText = text

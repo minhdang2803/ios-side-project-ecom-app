@@ -78,6 +78,46 @@ class LoginViewController: BaseViewController<LoginViewModel> {
         }).disposed(by: disposeBag)
     }
 
+    private lazy var loginButton: some UIView = {
+        let button = CustomButtonUIView(text: "Log in", trailingIcon: nil, backgroundColor: .systemOrange, textColor: .white)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var orDivider : some UIView = {
+        // Divider
+        let leftDivider = UIView()
+        leftDivider.backgroundColor = .black
+        let rightDivider = UIView()
+        rightDivider.backgroundColor = .black
+        // Text Label
+        let orText = UILabel()
+        orText.text = "Or"
+        orText.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        orText.textColor = .black
+        // Row
+        let orDivider = UIStackView(arrangedSubviews: [leftDivider,orText,rightDivider])
+        orDivider.spacing = CGFloat(18.8)
+        orDivider.axis = .horizontal
+        orDivider.alignment = .center
+        orDivider.distribution = .fill
+        leftDivider.snp.makeConstraints{
+            make in
+            make.height.equalTo(1)
+        }
+        rightDivider.snp.makeConstraints{
+            make in
+            make.height.equalTo(1)
+            make.width.equalTo(leftDivider.snp.width)
+        }
+        // Set priority
+        orText.setContentHuggingPriority(.required, for: .horizontal)
+        leftDivider.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
+        rightDivider.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        orDivider.translatesAutoresizingMaskIntoConstraints = false
+        return orDivider
+    }()
+
     /// Add subviews and setup AutoLayout constraints
     override func setupLayout() {
         // Set up background color
@@ -117,6 +157,18 @@ class LoginViewController: BaseViewController<LoginViewModel> {
             make in
             make.top.equalTo(passwordTextField.snp.bottom).offset(18)
             make.trailing.equalToSuperview().inset(20)
+        }
+        self.view.addSubview(loginButton)
+        loginButton.snp.makeConstraints{
+            make in
+            make.top.equalTo(forgotPasswordTextButton.snp.bottom).offset(17)
+            make.trailing.leading.equalToSuperview().inset(85)
+        }
+        self.view.addSubview(orDivider)
+        orDivider.snp.makeConstraints{
+            make in
+            make.top.equalTo(loginButton.snp.bottom).offset(43)
+            make.trailing.leading.equalToSuperview().inset(70.5)
         }
     }
 
