@@ -11,7 +11,22 @@ import RxSwift
 
 class LoginViewModel : Stepper {
     let steps = PublishRelay<Step>()
+    
+    
+    struct Input {
+        
+    }
+    
+    
     func onBack(){
         self.steps.accept(LoginStep.isAuthenticatorFinished)
+    }
+    
+    func onLoginWithGoogle(){
+        
+    }
+    
+    func onLoginWithFacebook(){
+        
     }
 }

@@ -61,6 +61,29 @@ class LoginViewController: BaseViewController<LoginViewModel> {
         return button
     }()
 
+    private lazy var loginWithFacebook = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "fb"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    private lazy var loginWithGoogle = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "google"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var providers = {
+        let row = UIStackView(arrangedSubviews: [loginWithFacebook, loginWithGoogle])
+        row.translatesAutoresizingMaskIntoConstraints = false
+        row.spacing = 0
+        row.distribution = .equalSpacing
+        row.axis = .horizontal
+        return row
+    }()
+
     override func setupAttributes() {
         view.backgroundColor = .systemBackground
     }
@@ -68,14 +91,6 @@ class LoginViewController: BaseViewController<LoginViewModel> {
     func setUpAppBar() {
         let leftBarButtonItem = UIBarButtonItem(customView: backButton)
         self.navigationItem.leftBarButtonItem = leftBarButtonItem
-
-    }
-
-    func setUpActions() {
-        backButton.rx.tap.subscribe(onNext: {
-            [weak self] in
-            self?.viewModel.onBack()
-        }).disposed(by: disposeBag)
     }
 
     private lazy var loginButton: some UIView = {
@@ -83,8 +98,8 @@ class LoginViewController: BaseViewController<LoginViewModel> {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    private lazy var orDivider : some UIView = {
+
+    private lazy var orDivider: some UIView = {
         // Divider
         let leftDivider = UIView()
         leftDivider.backgroundColor = .black
@@ -96,16 +111,16 @@ class LoginViewController: BaseViewController<LoginViewModel> {
         orText.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         orText.textColor = .black
         // Row
-        let orDivider = UIStackView(arrangedSubviews: [leftDivider,orText,rightDivider])
+        let orDivider = UIStackView(arrangedSubviews: [leftDivider, orText, rightDivider])
         orDivider.spacing = CGFloat(18.8)
         orDivider.axis = .horizontal
         orDivider.alignment = .center
         orDivider.distribution = .fill
-        leftDivider.snp.makeConstraints{
+        leftDivider.snp.makeConstraints {
             make in
             make.height.equalTo(1)
         }
-        rightDivider.snp.makeConstraints{
+        rightDivider.snp.makeConstraints {
             make in
             make.height.equalTo(1)
             make.width.equalTo(leftDivider.snp.width)
@@ -159,18 +174,25 @@ class LoginViewController: BaseViewController<LoginViewModel> {
             make.trailing.equalToSuperview().inset(20)
         }
         self.view.addSubview(loginButton)
-        loginButton.snp.makeConstraints{
+        loginButton.snp.makeConstraints {
             make in
             make.top.equalTo(forgotPasswordTextButton.snp.bottom).offset(17)
             make.trailing.leading.equalToSuperview().inset(85)
         }
         self.view.addSubview(orDivider)
-        orDivider.snp.makeConstraints{
+        orDivider.snp.makeConstraints {
             make in
             make.top.equalTo(loginButton.snp.bottom).offset(43)
             make.trailing.leading.equalToSuperview().inset(70.5)
         }
+        self.view.addSubview(providers)
+        providers.snp.makeConstraints{
+            make in
+            make.leading.trailing.equalToSuperview().inset(110)
+            make.top.equalTo(orDivider.snp.bottom).offset(20)
+        }
     }
+
 
     /// Bind ViewModel inputs and outputs using RxSwift
     override func bindViewModel() {
@@ -178,6 +200,22 @@ class LoginViewController: BaseViewController<LoginViewModel> {
     }
 }
 
+extension LoginViewController {
+    func setUpActions() {
+        backButton.rx.tap.subscribe(onNext: {
+            [weak self] in
+            self?.viewModel.onBack()
+        }).disposed(by: disposeBag)
+        loginWithGoogle.rx.tap.subscribe(onNext: {
+            [weak self] in
+            self?.viewModel.onLoginWithGoogle()
+        }).disposed(by: disposeBag)
+        loginWithFacebook.rx.tap.subscribe(onNext: {
+            [weak self] in
+            self?.viewModel.onLoginWithFacebook()
+        }).disposed(by: disposeBag)
+    }
+}
 #Preview {
     LoginViewController(viewModel: LoginViewModel())
 }
