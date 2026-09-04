@@ -30,7 +30,7 @@ class LoginViewController: BaseViewController<LoginViewModel> {
         let text = UILabel()
         text.text = "Log in"
         text.textColor = .black
-        text.font = UIFont.systemFont(ofSize: 22, weight: .medium)
+        text.font = UIFont.roboto(size: 22, weight: .medium)
         text.translatesAutoresizingMaskIntoConstraints = false
         return text
 
@@ -53,7 +53,7 @@ class LoginViewController: BaseViewController<LoginViewModel> {
         var config = UIButton.Configuration.plain()
         config.baseForegroundColor = .black
         var attributeContainer = AttributeContainer()
-        attributeContainer.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        attributeContainer.font = UIFont.roboto(size: 14, weight: .regular)
         let labeledText = AttributedString("Forgot password", attributes: attributeContainer)
         config.attributedTitle = labeledText
         let button = UIButton(configuration: config)
@@ -108,7 +108,7 @@ class LoginViewController: BaseViewController<LoginViewModel> {
         // Text Label
         let orText = UILabel()
         orText.text = "Or"
-        orText.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        orText.font = UIFont.roboto(size: 12, weight: .medium)
         orText.textColor = .black
         // Row
         let orDivider = UIStackView(arrangedSubviews: [leftDivider, orText, rightDivider])

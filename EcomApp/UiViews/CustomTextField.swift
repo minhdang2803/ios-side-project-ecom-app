@@ -21,7 +21,7 @@ class CustomTextField : UITextField {
         tf.leftViewMode = .always
         tf.attributedPlaceholder = NSAttributedString(string: self.hintText, attributes: [
             .foregroundColor: UIColor(hex: "#230A06") ?? UIColor.gray,
-            .font: UIFont.systemFont(ofSize: 16, weight: .regular)
+            .font: UIFont.roboto(size: 16, weight: .regular)
         ])
         tf.backgroundColor = .white
         return tf

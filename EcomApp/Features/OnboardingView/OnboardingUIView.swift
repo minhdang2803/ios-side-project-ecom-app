@@ -42,7 +42,7 @@ class OnboardingUIView: UIView {
         var config = UIButton.Configuration.plain()
         var attribute = AttributeContainer()
         attribute.foregroundColor = .black
-        attribute.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        attribute.font = UIFont.roboto(size: 16, weight: .regular)
         config.attributedTitle = AttributedString("Skip", attributes: attribute)
         var button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +62,7 @@ class OnboardingUIView: UIView {
     lazy var processedPageLabel: UILabel = {
         let label = UILabel()
         label.text = String(self.currentPageIndex) + "/3"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.font = UIFont.roboto(size: 16, weight: .regular)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -80,7 +80,7 @@ class OnboardingUIView: UIView {
     lazy var titleText: UILabel = {
         let label = UILabel()
         label.text = self.title
-        label.font = .systemFont(ofSize: 22, weight: .medium)
+        label.font = UIFont.roboto(size: 22, weight: .medium)
         label.numberOfLines = 1
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -90,7 +90,7 @@ class OnboardingUIView: UIView {
     lazy var subtitleText: UILabel = {
         let label = UILabel()
         label.text = self.subtitle
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = UIFont.roboto(size: 14, weight: .regular)
         label.numberOfLines = 3
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false

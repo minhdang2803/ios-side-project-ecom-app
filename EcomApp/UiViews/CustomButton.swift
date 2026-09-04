@@ -37,7 +37,7 @@ class CustomButtonUIView: UIButton {
         // Styling cho text
         // Set màu cho text
         var stylingContainer = AttributeContainer()
-        stylingContainer.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        stylingContainer.font = UIFont.roboto(size: 16, weight: .medium)
         stylingContainer.foregroundColor = self.layoutTextColor ?? .white
         // Set text
         buttonConfig.attributedTitle = AttributedString(self.layoutText, attributes: stylingContainer)

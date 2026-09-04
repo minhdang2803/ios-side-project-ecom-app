@@ -261,6 +261,7 @@
 				A01F49882F82DA18003BB0AE /* XCRemoteSwiftPackageReference "moya" */,
 				A01F49912F82DA62003BB0AE /* XCRemoteSwiftPackageReference "rxswift" */,
 				A01F499C2F82DAB4003BB0AE /* XCRemoteSwiftPackageReference "RxFlow" */,
+				9B582B06302B0ECC00C9FF62 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A01F49422F82D6D9003BB0AE /* Products */;
@@ -622,6 +623,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9B582B06302B0ECC00C9FF62 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.17.0;
+			};
+		};
 		A01F497E2F82D999003BB0AE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";

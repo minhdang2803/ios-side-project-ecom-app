@@ -5,12 +5,11 @@
 //  Created by Le Minh Dang on 6/4/26.
 //
 
-import UIKit
 import RxFlow
 import RxSwift
+import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
     var window: UIWindow?
     let coordinator = FlowCoordinator() // 1. Khởi tạo Coordinator
     let disposeBag = DisposeBag()
@@ -23,7 +22,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         self.window = window
+        
+        // 2. Khởi tạo MainFlow
         let mainFlow = MainFlow()
+
+        // 3.Lắng nghe trạng thái của Coordinator (dùng cho Debugging nếu cần)
+        coordinator.rx.willNavigate.subscribe(onNext: { _, step in
+            print("➡️ Navigating to step: \(step)")
+        }).disposed(by: disposeBag)
         // 4. Khi Flow đã sẵn sàng, gán rootViewController cho window
         Flows.use(mainFlow, when: .created) { root in
             window.rootViewController = root
@@ -62,7 +68,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
-
-
 }
-
